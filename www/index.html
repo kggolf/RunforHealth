@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>RunforHealth</title>
         
-        <script LANGUAGE="JavaScript">
+        <script type="text/javascript" charset="utf-8">
             var ms = 0;
             var state = 0;
             function startstop() {
@@ -57,13 +57,21 @@
     </head>
     
     <body onLoad="display()">
-        <h1>RunforHealth</h1>
+    
+    <div data-role="page" id="page1">
+    	<div data-theme="a" data-role="header">		
+		<a data-role="button" href="#page1" class="ui-btn-left">Back</a>
+		<h3>RunforHealth</h3>
+	</div>
         
-        <FORM NAME="stpw">
-            <INPUT TYPE="text" Name="time">
-            <INPUT TYPE="BUTTON" Name="ssbutton" VALUE="Start/Stop" onClick="startstop()">
-            <INPUT TYPE="BUTTON" NAME="reset" VALUE="Reset" onClick="swreset()">
-        </FORM>
+        <div data-role="content">
+    		<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><button onClick="startstop();">startstop</button></div>
+				<div class="ui-block-b"><button onClick="swreset();">Reset</button></div>
+			</fieldset>
+			<canvas id="c" width="1136" height="640"></canvas>
+
+		</div>
         
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
