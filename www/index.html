@@ -23,10 +23,48 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>RunforHealth</title>
+        
+        <script LANGUAGE="JavaScript">
+            var ms = 0;
+            var state = 0;
+            function startstop() {
+                if (state == 0) {
+                    state = 1;
+                    then = new Date();
+                    then.setTime(then.getTime() - ms);
+            } 
+                else {
+                    state = 0;
+                    now = new Date();
+                    ms = now.getTime() - then.getTime();
+                    document.stpw.time.value = ms;
+            }
+        }
+        function swreset() {
+            state = 0;
+            ms = 0;
+            document.stpw.time.value = ms;
+        }
+        function display() {
+            setTimeout("display();", 50);
+            if (state == 1)  {now = new Date();
+            ms = now.getTime() - then.getTime();
+            document.stpw.time.value = ms;
+        }
+    </script>
+
     </head>
-    <body>
-        <h1>kggolf</h1>
+    
+    <body onLoad="display()">
+        <h1>RunforHealth</h1>
+        
+        <FORM NAME="stpw">
+            <INPUT TYPE="text" Name="time">
+            <INPUT TYPE="BUTTON" Name="ssbutton" VALUE="Start/Stop" onClick="startstop()">
+            <INPUT TYPE="BUTTON" NAME="reset" VALUE="Reset" onClick="swreset()">
+        </FORM>
+        
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
