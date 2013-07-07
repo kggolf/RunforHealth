@@ -10,58 +10,75 @@
 <script src="js/jquery.mobile-1.3.1.min.js"></script>
 
  <script type="text/javascript" charset="utf-8">
-            var ms = 0;
-            var state = 0;
+
+		var ms = 0;
+		var state = 0;
+
+		function startstop() {
+			if (state == 0) {
+			state = 1;
+			then = new Date();
+			then.setTime(then.getTime() - ms);
+			}   
+			else {
+			state = 0;
+			now = new Date();
+			ms = now.getTime() - then.getTime();
 			
-			var sec_num = parseInt(this, 10); 
-    		var hours   = Math.floor(sec_num / 3600);
-    		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    		var seconds = sec_num - (hours * 3600) - (minutes * 60);
+			hours = Math.floor(ms%(1000 * 60 * 60 * 24)/(1000 * 60 * 60));
+			if (hours < 10)
+			hours = "0" + hours
 			
-            function startstop() {
-                if (state == 0) {
-                    state = 1;
-                    then = new Date();
-                    then.setTime(then.getTime() - ms);
-            } 
-                else {
-                    state = 0;
-                    now = new Date();
-                    ms = now.getTime() - then.getTime();
-                    document.stpw.time.value = ms;
-            }
-        }
-        function swreset() {
-            state = 0;
-            ms = 0;
-            document.stpw.time.value = ms;
-        }
+			minutes = Math.floor((ms%(1000 * 60 * 60))/(1000 * 60));
+			if (minutes < 10)
+			minutes = "0" + minutes
+			
+			seconds = Math.floor((ms%(1000 * 60))/1000);
+			if (seconds < 10)
+			seconds = "0" + seconds
+    	
+			document.all('timer').innerHTML = '<h1>'+hours+':'+minutes+':'+seconds+'</h1>';
+   	   		}
+		}
+
+		function swreset() {
+			state = 0;
+			ms = 0;
+			document.all('timer').innerHTML = '<h1>00:00:00</h1>';
+		}
+
+		function display() {
+		setTimeout("display();", 500);
+		if (state == 1)  {
+		now = new Date();
+		ms = now.getTime() - then.getTime();
+		hours = Math.floor(ms%(1000 * 60 * 60 * 24)/(1000 * 60 * 60));
+		if (hours < 10)
+		hours = "0" + hours
+
+		minutes_divisor = ms%(1000 * 60 * 60);
+		minutes = Math.floor(minutes_divisor/(1000 * 60));
+		if (minutes < 10)
+		minutes = "0" + minutes
+	
+		seconds_divisor = ms%(1000 * 60);
+		seconds = Math.floor(seconds_divisor/1000);
+		if (seconds < 10)
+		seconds = "0" + seconds
 		
-        function display() {
-            setTimeout("display();", 50);
-            if (state == 1)  {now = new Date();
-            ms = now.getTime() - then.getTime();
-			var t = ms/1000;
-            document.stpw.time.value = t;
-        }}
-        </script>
+		document.all('timer').innerHTML = '<h1>'+hours+':'+minutes+':'+seconds+'</h1>';
+   		}
+		}
+		</SCRIPT>
 
-</head> 
-<body onLoad="display()"> 
+</HEAD>
 
-<div data-role="page" id="page">
-  <div data-role="header">
-		<h1>RunforHealth</h1>
-  </div>
-  
+<BODY onLoad="display();sClock();" style="background: #FFFFFF;">
 	<FORM NAME="stpw">
-	<h4>Time:
-<INPUT TYPE="text" Name="time"></h4>
+    <h4>Time : </h4>
+	<div id="timer" class="logininput" align="center"><h1>00:00:00</h1></div>
 	<INPUT TYPE="BUTTON" Name="ssbutton" VALUE="Start/Stop" onClick="startstop()">
 	<INPUT TYPE="BUTTON" NAME="reset" VALUE="Reset" onClick="swreset()">
 	</FORM>
-
-
-</div>
 </body>
 </html>
