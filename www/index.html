@@ -74,11 +74,31 @@
 </head>
 
 <body onLoad="display();" style="background: #FFFFFF;">
+
+<div data-role="page" id="page" >
+
+	<div data-role="header" align="center">
+		<h1>RunforHealth</h1>
+	</div><br><br>
+<table border="0" cellspacing="0" cellpadding="0" align="CENTER">
+
 	<form NAME="stpw">
-    <h4>Time : </h4>
+ <tr>
+	<td>
+    <h4>Time&nbsp;:&nbsp;</h4>
+    </td>
+    <td>
 	<div id="timer" class="logininput" align="center"><h1>00:00:00</h1></div>
+    </td>
+</tr>
+<tr>
+	<td colspan="2">
 	<input TYPE="BUTTON" Name="ssbutton" VALUE="Start/Stop" onClick="startstop()">
 	<input TYPE="BUTTON" NAME="reset" VALUE="Reset" onClick="swreset()">
 	</form>
+    </td>
+</tr>
+</table>
+</div>
 </body>
 </html>
